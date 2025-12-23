@@ -26,8 +26,11 @@ export const fetchData = async (endpoint: string, params?: any) => {
 // 示例：提交数据
 export const postData = async (endpoint: string, data: any, options?: { headers?: any }) => {
   try {
-    // 若有自定义 headers 则合并
-    const response = await api.post(endpoint, data, options);
+    // 如果 endpoint 是绝对地址，直接用 axios.post，否则用 api 实例
+    const isAbsolute = /^https?:\/\//.test(endpoint);
+    const response = isAbsolute
+      ? await axios.post(endpoint, data, options)
+      : await api.post(endpoint, data, options);
     return response.data;
   } catch (error) {
     throw error;

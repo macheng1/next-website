@@ -15,22 +15,36 @@ export const submitExampleData = async (data: any) => {
 // 保留原有 AI 技术支持接口
 export const getTechnicalSupportResponse = async (userQuery: string, currentLang: Language) => {
   const languageName = currentLang === 'zh' ? 'Chinese' : 'English';
+  const directProxy = process.env.NEXT_PUBLIC_QWEN_DIRECT_PROXY === 'true';
+  const endpoint = directProxy
+    ? process.env.NEXT_PUBLIC_QWEN_API_ENDPOINT || 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
+    : '/api/qwen';
+  const model = process.env.NEXT_PUBLIC_QWEN_MODEL || 'qwen-plus';
+  const systemPrompt = process.env.NEXT_PUBLIC_QWEN_SYSTEM_PROMPT || 'You are a helpful assistant.';
   try {
     const response = await postData(
-      '/api/qwen',
+      endpoint,
       {
-        model: 'qwen-plus',
+        model,
         messages: [
           {
             role: "system",
-            content: `You are the Titan-Mech Industrial Support Assistant.\nKnowledge Base: Titan-V5 CNC, Sentinel-12 Robot, Nexus Energy.\nContext: The user is currently browsing the site in ${languageName}.\nRequirements:\n1. Respond strictly in ${languageName}.\n2. Maintain professional industrial engineering tone.\n3. Suggest RFQ for complex blueprints.`
+            content: systemPrompt + `\nKnowledge Base: Titan-V5 CNC, Sentinel-12 Robot, Nexus Energy.\nContext: The user is currently browsing the site in ${languageName}.\nRequirements:\n1. Respond strictly in ${languageName}.\n2. Maintain professional industrial engineering tone.\n3. Suggest RFQ for complex blueprints.`
           },
           {
             role: "user",
             content: userQuery
           }
         ]
-      }
+      },
+      directProxy
+        ? {
+            headers: {
+              'Authorization': `Bearer ${process.env.NEXT_PUBLIC_QWEN_API_KEY}`,
+              'Content-Type': 'application/json',
+            },
+          }
+        : undefined
     );
     // 返回结构适配
     const reply = response?.choices?.[0]?.message?.content;
