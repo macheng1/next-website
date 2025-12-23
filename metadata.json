@@ -1,0 +1,8 @@
+{
+  "name": "泰坦机电工业解决方案",
+  "description": "领先的企业级制造门户网站，包含先进的产品展示中心、研发实力展示、全球资源中心及 AI 技术助理。",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
