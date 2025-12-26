@@ -8,10 +8,10 @@ RUN npm install -g pnpm
 WORKDIR /app
 
 # 拷贝依赖文件
-COPY package.json pnpm-lock.yaml* .
+COPY package.json pnpm-lock.yaml* ./
 
-# 安装依赖
-RUN pnpm install --frozen-lockfile
+# 设置国内镜像源并安装依赖
+RUN pnpm config set registry https://registry.npmmirror.com && pnpm install --frozen-lockfile
 
 # 拷贝全部源代码
 COPY . .
