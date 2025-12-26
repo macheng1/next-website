@@ -36,7 +36,6 @@ COPY --from=builder /app/.env.production ./.env.production
 COPY --from=builder /app/.env.development ./.env.development
 COPY --from=builder /app/.env.test ./.env.test
 COPY --from=builder /app/.env.uat ./.env.uat
-COPY --from=builder /app/.env.local ./.env.local
 
 # 启动 Next.js 应用
 ENV ENV_NAME=development
