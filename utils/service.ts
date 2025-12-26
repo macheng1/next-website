@@ -90,7 +90,7 @@ export const deleteData = async (id: string | number) => {
 export const uploadFile = async (file: File, onProgress?: (progress: number) => void) => {
   const formData = new FormData();
   formData.append('file', file);
-  
+
   return post('/file/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',

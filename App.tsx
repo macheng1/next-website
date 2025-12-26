@@ -1,13 +1,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { 
-  Menu, X, ChevronRight, Search, Globe, FileText, 
-  Settings, Award, Users, Mail, MessageSquare, 
-  Download, Box, Cpu, HardHat, TrendingUp, BarChart3, 
-  MapPin, Phone, Github, Linkedin, Twitter, Languages
+import {
+  Menu, X, Mail,
+  Download, Box, Cpu, TrendingUp, Languages
 } from 'lucide-react';
-import { LanguageProvider, useTranslation, Language } from './i18n';
+import { LanguageProvider, useTranslation } from './i18n';
 import AIChat from './components/AIChat';
 
 const Navbar = () => {
@@ -50,7 +48,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <button 
+            <button
               onClick={toggleLanguage}
               className="flex items-center space-x-1 p-2 text-slate-400 hover:text-white transition-colors bg-slate-800 rounded-lg"
             >

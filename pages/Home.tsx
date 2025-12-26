@@ -1,8 +1,9 @@
 
 
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronRight, ShieldCheck, Zap, Factory, Microscope } from 'lucide-react';
+import { ChevronRight, Zap } from 'lucide-react';
 import { useTranslation } from '../i18n';
 
 const Home = () => {
@@ -11,10 +12,14 @@ const Home = () => {
     <div className="animate-in fade-in duration-700">
       <section className="relative h-[85vh] flex items-center overflow-hidden bg-slate-900">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1504917595217-d4dc5f566f1f?auto=format&fit=crop&q=80&w=1920" 
-            alt="Manufacturing Facility" 
+          <Image
+            src="https://images.unsplash.com/photo-1504917595217-d4dc5f566f1f?auto=format&fit=crop&q=80&w=1920"
+            alt="Manufacturing Facility"
             className="w-full h-full object-cover opacity-40 grayscale"
+            fill
+            priority
+            sizes="100vw"
+            style={{ objectFit: 'cover', opacity: 0.4, filter: 'grayscale(1)' }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
         </div>

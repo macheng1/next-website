@@ -1,12 +1,10 @@
 
 import React, { useState, useMemo } from 'react';
-import Link from 'next/link';
 import { PRODUCTS } from '../constants';
 import { Category, Product } from '../types';
 import { useTranslation } from '../i18n';
-import { 
-  Filter, Search, ArrowRightLeft, Download, Eye, X, 
-  Settings, Layers, ChevronRight, FileCode
+import {
+  Filter, Search, X, ChevronRight
 } from 'lucide-react';
 
 const Showroom = () => {
@@ -38,9 +36,9 @@ const Showroom = () => {
         <div className="bg-white p-4 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6">
           <div className="flex-grow relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-            <input 
-              type="text" 
-              placeholder={t('search_placeholder')} 
+            <input
+              type="text"
+              placeholder={t('search_placeholder')}
               className="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-blue-500 text-sm outline-none"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -48,7 +46,7 @@ const Showroom = () => {
           </div>
           <div className="flex items-center space-x-2">
             <Filter size={18} className="text-slate-400" />
-            <select 
+            <select
               className="bg-slate-50 border-none py-3 px-4 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 font-medium outline-none"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value as any)}

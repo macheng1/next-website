@@ -1,9 +1,11 @@
 
 import React from 'react';
+import Image from 'next/image';
 import { CASE_STUDIES } from '../constants';
-import { BarChart3, TrendingUp, ShieldAlert, Cpu, ArrowRight } from 'lucide-react';
+import { ShieldAlert, Cpu, ArrowRight } from 'lucide-react';
 // Import useTranslation to access current language
 import { useTranslation } from '../i18n';
+
 
 const CaseStudies = () => {
   // Get current language from hook
@@ -37,7 +39,15 @@ const CaseStudies = () => {
             <div className="lg:w-1/2">
               <div className="relative">
                 {/* Fixed: Access localized property using current language */}
-                <img src={study.image} alt={study.title[lang]} className="rounded-[3rem] shadow-2xl relative z-10 w-full" />
+                <Image
+                  src={study.image}
+                  alt={study.title[lang]}
+                  className="rounded-[3rem] shadow-2xl relative z-10 w-full"
+                  width={800}
+                  height={500}
+                  style={{ width: '100%', height: 'auto' }}
+                  priority={index === 0}
+                />
                 <div className={`absolute -top-6 -left-6 w-32 h-32 bg-blue-600 rounded-full opacity-10 z-0`}></div>
                 <div className={`absolute -bottom-6 -right-6 w-48 h-48 bg-slate-900 rounded-[3rem] opacity-5 z-0`}></div>
               </div>

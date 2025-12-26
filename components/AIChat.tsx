@@ -1,6 +1,6 @@
 
- 
-import { MessageSquare, Send, X, Bot, User, Loader2 } from 'lucide-react';
+
+import { MessageSquare, Send, X, Bot } from 'lucide-react';
 import { getTechnicalSupportResponse } from '../geminiService';
 import { useTranslation } from '../i18n';
 import React, { useState, useEffect, useRef } from 'react';
@@ -11,6 +11,7 @@ interface Message {
 
 const AIChat: React.FC = () => {
   const { t, lang } = useTranslation();
+  console.log("🚀 ~ AIChat ~ t:", t)
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -19,11 +20,11 @@ const AIChat: React.FC = () => {
 
   useEffect(() => {
     setMessages([
-      { 
-        role: 'assistant', 
-        content: lang === 'zh' 
-          ? '您好！我是泰坦智能助手。今天有什么可以帮您的？' 
-          : 'Hello! I am Titan AI Assistant. How can I help you today?' 
+      {
+        role: 'assistant',
+        content: lang === 'zh'
+          ? '您好！我是泰坦智能助手。今天有什么可以帮您的？'
+          : 'Hello! I am Titan AI Assistant. How can I help you today?'
       }
     ]);
   }, [lang]);

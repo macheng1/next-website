@@ -1,8 +1,7 @@
 
 import React from 'react';
-import { 
-  Shield, Award, HardHat, Microscope, Globe, 
-  Settings, CheckCircle2, Factory, Monitor 
+import {
+  Shield, Award, Globe, CheckCircle2, Monitor
 } from 'lucide-react';
 
 const Capabilities = () => {
