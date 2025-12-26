@@ -36,15 +36,7 @@ export const getTechnicalSupportResponse = async (userQuery: string, currentLang
             content: userQuery
           }
         ]
-      },
-      directProxy
-        ? {
-            headers: {
-              'Authorization': `Bearer ${process.env.NEXT_PUBLIC_QWEN_API_KEY}`,
-              'Content-Type': 'application/json',
-            },
-          }
-        : undefined
+      }
     );
     // 返回结构适配
     const reply = response?.choices?.[0]?.message?.content;
