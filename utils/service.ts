@@ -1,40 +1,144 @@
-import axios from 'axios';
+/**
+ * 业务接口封装
+ * 基于统一的 request 封装具体业务接口
+ */
 
-// 预留后端 API 基础地址
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000/api';
+import { get, post, put, del } from './request';
+import { downloadFile, exportFile } from './download';
 
-// 通用 axios 实例
-const api = axios.create({
-  baseURL: BASE_URL,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// ==================== 示例接口 ====================
 
-// 示例：获取数据
+/**
+ * 获取示例数据
+ */
 export const fetchData = async (endpoint: string, params?: any) => {
-  try {
-    const response = await api.get(endpoint, { params });
-    return response.data;
-  } catch (error) {
-    // 这里可以做统一错误处理
-    throw error;
-  }
+  return get(endpoint, { params });
 };
 
-// 示例：提交数据
-export const postData = async (endpoint: string, data: any, options?: { headers?: any }) => {
-  try {
-    // 如果 endpoint 是绝对地址，直接用 axios.post，否则用 api 实例
-    const isAbsolute = /^https?:\/\//.test(endpoint);
-    const response = isAbsolute
-      ? await axios.post(endpoint, data, options)
-      : await api.post(endpoint, data, options);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+/**
+ * 提交示例数据
+ */
+export const postData = async (endpoint: string, data: any) => {
+  return post(endpoint, data);
 };
 
-// 更多 service 方法可在此扩展
+// ==================== 用户相关接口 ====================
+
+/**
+ * 用户登录
+ */
+export const login = async (username: string, password: string) => {
+  return post('/user/login', { username, password });
+};
+
+/**
+ * 获取用户信息
+ */
+export const getUserInfo = async () => {
+  return get('/user/info');
+};
+
+/**
+ * 退出登录
+ */
+export const logout = async () => {
+  return post('/user/logout');
+};
+
+// ==================== 数据查询接口 ====================
+
+/**
+ * 获取列表数据
+ */
+export const getList = async (params: any) => {
+  return get('/data/list', { params });
+};
+
+/**
+ * 获取详情
+ */
+export const getDetail = async (id: string | number) => {
+  return get(`/data/detail/${id}`);
+};
+
+/**
+ * 创建数据
+ */
+export const createData = async (data: any) => {
+  return post('/data/create', data);
+};
+
+/**
+ * 更新数据
+ */
+export const updateData = async (id: string | number, data: any) => {
+  return put(`/data/update/${id}`, data);
+};
+
+/**
+ * 删除数据
+ */
+export const deleteData = async (id: string | number) => {
+  return del(`/data/delete/${id}`);
+};
+
+// ==================== 文件相关接口 ====================
+
+/**
+ * 上传文件
+ */
+export const uploadFile = async (file: File, onProgress?: (progress: number) => void) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  
+  return post('/file/upload', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    onUploadProgress: (progressEvent) => {
+      if (onProgress && progressEvent.total) {
+        const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        onProgress(progress);
+      }
+    },
+  });
+};
+
+/**
+ * 下载文件
+ */
+export const downloadFileById = async (fileId: string, fileName?: string) => {
+  return downloadFile(`/file/download/${fileId}`, { fileName });
+};
+
+/**
+ * 导出 Excel
+ */
+export const exportExcel = async (params: any, fileName?: string) => {
+  return exportFile('/export/excel', params, { fileName });
+};
+
+/**
+ * 导出 PDF
+ */
+export const exportPdf = async (params: any, fileName?: string) => {
+  return exportFile('/export/pdf', params, { fileName });
+};
+
+// ==================== RFQ 相关接口 ====================
+
+/**
+ * 提交报价请求
+ */
+export const submitRFQ = async (data: any) => {
+  return post('/rfq/submit', data);
+};
+
+/**
+ * 获取报价列表
+ */
+export const getRFQList = async (params: any) => {
+  return get('/rfq/list', { params });
+};
+
+// 更多业务接口可在此扩展...

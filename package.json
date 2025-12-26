@@ -5,8 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev:test": "next dev --env-file .env.test",
+    "dev:uat": "next dev --env-file .env.uat",
+    "dev:pro": "next dev --env-file .env.production",
+    "build": "next build --env-file .env.dev",
+    "build:test": "next build --env-file .env.test",
+    "build:uat": "next build --env-file .env.uat",
+    "build:pro": "next build --env-file .env.production",
+    "start": "next start",
+    "start:test": "next start --env-file .env.test",
+    "start:uat": "next start --env-file .env.uat",
+    "start:pro": "next start --env-file .env.production"
   },
   "dependencies": {
     "@google/genai": "^1.34.0",
