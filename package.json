@@ -4,18 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "dev:test": "next dev --env-file .env.test",
-    "dev:uat": "next dev --env-file .env.uat",
-    "dev:pro": "next dev --env-file .env.production",
-    "build": "next build --env-file .env.dev",
+    "dev": "cross-env PORT=4001 next dev --env-file .env.development",
+    "test": "cross-env PORT=4002 next dev --env-file .env.test",
+    "uat": "cross-env PORT=4003 next dev --env-file .env.uat",
+    "build": "next build --env-file .env.development",
     "build:test": "next build --env-file .env.test",
     "build:uat": "next build --env-file .env.uat",
-    "build:pro": "next build --env-file .env.production",
-    "start": "next start",
+    "start": "next start --env-file .env.development",
     "start:test": "next start --env-file .env.test",
-    "start:uat": "next start --env-file .env.uat",
-    "start:pro": "next start --env-file .env.production"
+    "start:uat": "next start --env-file .env.uat"
   },
   "dependencies": {
     "@google/genai": "^1.34.0",
