@@ -41,4 +41,4 @@ COPY --from=builder /app/.env.uat ./.env.uat
 ENV ENV_NAME=development
 EXPOSE 4001
 ENV PORT=4001
-CMD ["/bin/sh", "-c", "cp .env.$ENV_NAME .env.local && pnpm start"]
+CMD ["pnpm", "start"]
