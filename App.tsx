@@ -80,7 +80,7 @@ const Navbar = () => {
                 key={link.path}
                 href={link.path}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center space-x-3 block px-3 py-4 rounded-md text-base font-medium"
+                className="flex items-center space-x-3 px-3 py-4 rounded-md text-base font-medium"
               >
                 {link.icon}
                 <span>{link.name}</span>

@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Image from 'next/image';
 import {
   Shield, Award, Globe, CheckCircle2, Monitor
 } from 'lucide-react';
@@ -44,7 +45,14 @@ const Capabilities = () => {
             {facilityFeatures.map((f, i) => (
               <div key={i} className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all">
                 <div className="h-56 overflow-hidden">
-                  <img src={f.img} alt={f.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <Image
+                    src={f.img}
+                    alt={f.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    width={400}
+                    height={224}
+                    style={{ width: '100%', height: '100%' }}
+                  />
                 </div>
                 <div className="p-8">
                   <h3 className="text-xl font-bold mb-4 group-hover:text-blue-600 transition-colors">{f.title}</h3>
@@ -83,8 +91,22 @@ const Capabilities = () => {
             </div>
             <div className="md:w-1/2 relative">
               <div className="grid grid-cols-2 gap-4">
-                <img src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?auto=format&fit=crop&q=80&w=400" className="rounded-2xl rotate-3 shadow-xl" />
-                <img src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?auto=format&fit=crop&q=80&w=400" className="rounded-2xl -rotate-6 translate-y-8 shadow-xl" />
+                <Image
+                  src="https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?auto=format&fit=crop&q=80&w=400"
+                  alt="生产车间"
+                  className="rounded-2xl rotate-3 shadow-xl"
+                  width={400}
+                  height={224}
+                  style={{ width: '100%', height: 'auto' }}
+                />
+                <Image
+                  src="https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?auto=format&fit=crop&q=80&w=400"
+                  alt="检测实验室"
+                  className="rounded-2xl -rotate-6 translate-y-8 shadow-xl"
+                  width={400}
+                  height={224}
+                  style={{ width: '100%', height: 'auto' }}
+                />
               </div>
             </div>
           </div>
